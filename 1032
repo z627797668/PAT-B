@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 100005;
+int main()
+{
+	int stu[maxn],id,score;
+	int N;
+	memset(stu, 0, sizeof(stu));
+	scanf_s("%d", &N);
+	int max = 1;
+	for (int i = 0; i < N; i++)
+	{
+		scanf_s("%d %d", &id, &score);
+		stu[id] += score;
+		if (stu[id] > stu[max])
+			max = id;
+	}
+	printf("%d %d", max, stu[max]);
+	system("pause");
+	return 0;
+}
