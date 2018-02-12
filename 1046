@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int N;
+	scanf_s("%d", &N);
+	int saya, sayb, pusha, pushb;
+	int a = 0, b = 0;
+	for (int i = 0; i < N; i++)
+	{
+		scanf_s("%d %d %d %d", &saya, &pusha, &sayb, &pushb);
+		if ((saya + sayb) == pusha && pushb != (saya + sayb))
+			b++;
+		else if ((saya + sayb) != pusha && pushb == (saya + sayb))
+			a++;
+		else
+			;
+	}
+	printf("%d %d", a, b);
+	system("pause");
+	return 0;
+}
