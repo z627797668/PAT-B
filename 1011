@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int T;
+	scanf_s("%d", &T);
+	long A, B,C,sum;
+	for (int i = 1; i <= T; i++)
+	{
+		scanf_s("%lld %lld %lld", &A, &B, &C);
+		sum = A + B;
+			if (sum > C)
+				printf("Case #%d: true", i);
+			else
+				printf("Case #%d: false", i);
+		if (i != T)
+			printf("\n");
+	}
+	system("pause");
+	return 0;
+}
