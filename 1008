@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+const int maxn = 105;
+int main()
+{
+	int num[maxn];
+	int N, M;
+	int cout = 0;
+	scanf_s("%d %d", &N, &M);
+	M=M%N;
+	for (int i = 0; i < N; i++)
+	{
+		scanf_s("%d", &num[i]);
+	}
+	for (int i = N-M; i < N; i++)
+	{
+		printf("%d", num[i]);
+		cout++;
+		if (cout != N)
+			printf(" ");
+	}
+	for (int i = 0; i < N-M; i++)
+	{
+		printf("%d", num[i]);
+		cout++;
+		if (cout != N)
+			printf(" ");
+	}
+	system("pause");
+	return 0;
+}
