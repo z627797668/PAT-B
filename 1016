@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int A, B, da, db;
+	int pa = 0, pb = 0;
+	scanf_s("%d %d %d %d", &A, &da, &B, &db);
+	while (A!=0)
+	{
+		if (A % 10 == da)
+			pa = pa * 10 + da;
+		A /= 10;
+	}
+	while (B != 0)
+	{
+		if (B % 10 == db)
+			pb = pb * 10 + db;
+		B /= 10;
+	}
+	printf("%d", pa + pb);
+	system("pause");
+	return 0;
+}
