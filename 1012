@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<stdlib.h>
+const int maxn = 1005;
+int main()
+{
+	int num[maxn];
+	int N;
+	scanf_s("%d", &N);
+	for (int i = 0; i < N; i++)
+	{
+		scanf_s("%d", &num[i]);
+	}
+	int ans1 = 0;
+	for (int i = 0; i < N; i++)
+	{
+		if (num[i] % 5 == 0 && num[i] % 2 == 0)
+			ans1 += num[i];
+	}
+	if (ans1 != 0)
+		printf("%d ", ans1);
+	else
+		printf("N ");
+	int count = 0;
+	int ans2 = 0;
+	bool flag = false;
+	for (int i = 0; i < N; i++)
+	{
+		if (num[i] % 5 == 1)
+		{
+			flag = true;
+			if (count % 2 == 0)
+			{
+				ans2 += num[i];
+			}
+			else
+				ans2 -= num[i];
+			count++;
+		}
+	}
+	if (flag ==true)
+		printf("%d ", ans2);
+	else
+		printf("N ");
+	int ans3 = 0;
+	for (int i = 0; i < N; i++)
+	{
+		if (num[i] % 5 == 2)
+		{
+			ans3++;
+		}
+	}
+	if (ans3 != 0)
+		printf("%d ", ans3);
+	else
+		printf("N ");
+	int ans4 = 0,count4=0;
+	for (int i = 0; i < N; i++)
+	{
+		if (num[i] % 5 == 3)
+		{
+			count4++;
+			ans4 += num[i];
+		}
+	}
+	if (ans4 != 0)
+		printf("%.1lf ", (1.0)*ans4 / count4);
+	else
+		printf("N ");
+	int max = 0;
+	for (int i = 0; i < N; i++)
+	{
+		if (num[i] % 5 == 4)
+		{
+			if (num[i] > max)
+				max = num[i];
+		}
+	}
+	if (max != 0)
+		printf("%d", max);
+	else
+		printf("N");
+	system("pause");
+	return 0;
+}
