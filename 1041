@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 1005;
+struct student
+{
+	int test;
+	int exam;
+	char id[15];
+}stu[maxn];
+int main()
+{
+	int N, M;
+	long temptest, tempexam;
+	char tempid[15];
+	scanf("%d", &N);
+	for (int i = 0; i <N; i++)
+	{
+		scanf("%s %d %d", stu[i].id, &temptest, &tempexam);
+		stu[i].test = temptest;
+		stu[i].exam = tempexam;
+	}
+	scanf("%d", &M);
+	for (int i = 0; i < M; i++)
+	{
+		scanf("%d", &temptest);
+		for (int i = 0; i < N; i++)
+		{
+			if (stu[i].test == temptest)
+			{
+				printf("%s %d\n", stu[i].id, stu[i].exam);
+				break;
+			}
+		}
+	}
+	system("pause");
+	return 0;
+}
