@@ -1,0 +1,50 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct person
+{
+	char name[6];
+	int year;
+	int month;
+	int day;
+}big,small,old,young,temp;
+void init()
+{
+	small.year = 1814;
+	small.month = 9;
+	small.day = 6;
+	big.year = 2014;
+	big.month = 9;
+	big.day = 6;
+	old = big;
+	young = small;
+}
+bool comp(person a,person b)
+{
+	if (a.year < b.year)return true;
+	else if (a.year == b.year&&a.month < b.month)return true;
+	else if (a.year == b.year&&a.month == b.month&&a.day <= b.day)return true;
+	else return false;
+}
+int main()
+{
+	init();
+	int N,count=0;
+	scanf("%d", &N);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%s %d/%d/%d", temp.name, &temp.year, &temp.month, &temp.day);
+		if (comp(temp, big) == true && comp(small, temp) == true)
+		{
+			count++;
+			if (comp(temp, old) == true)
+				old = temp;
+			if (comp(young, temp) == true)
+				young = temp;
+		}
+	}
+	if(count!=0)
+		printf("%d %s %s", count, old.name, young.name);
+	else printf("0");
+	system("pause");
+	return 0;
+}
