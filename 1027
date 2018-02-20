@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int N;
+	char c;
+	scanf("%d %c", &N, &c);
+	int k=1;
+	while (1)
+	{
+		if ((k*k * 2 - 1) <= N && ((k + 1)*(k + 1) * 2 - 1) > N)
+			break;
+		else
+			k++;
+	}
+	for (int i = k; i >=1; i--)
+	{
+		for (int j = 0; j < k-i; j++)
+		{
+			printf(" ");
+		}
+		for (int j = i*2-1; j>0; j--)
+		{
+			printf("%c", c);
+		}
+		printf("\n");
+	}
+	for (int i = 2; i <=k; i++)
+	{
+		for (int j = 0; j < k - i; j++)
+		{
+			printf(" ");
+		}
+		for (int j = i * 2 - 1; j > 0; j--)
+		{
+			printf("%c", c);
+		}
+		printf("\n");
+	}
+	printf("%d", N - (k*k * 2 - 1));
+	system("pause");
+	return 0;
+}
