@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 1005;
+int main()
+{
+	char N[maxn];
+	gets_s(N);
+	int len = strlen(N);
+	int ans[10] = { 0 };
+	for (int i = 0; i < len; i++)
+	{
+		ans[N[i] - '0']++;
+	}
+	for (int i = 0; i < 10; i++) {
+		if(ans[i]!=0)
+		printf("%d:%d\n", i, ans[i]);
+	}
+	system("pause");
+	return 0;
+}
