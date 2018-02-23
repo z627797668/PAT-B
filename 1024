@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+const int maxn = 10005;
+int main()
+{
+	char str[maxn],temp[maxn];
+	int sum = 0;
+	bool flag = true;
+	scanf("%s", str);
+	if (str[0] == '+')
+		;
+	else
+		printf("-");
+	temp[0] = str[1];
+	int i = 3, j = 1;
+	while(str[i]!='E')
+	{
+		temp[j++] = str[i];
+		i++;
+	}
+	i++;
+	int len = strlen(str);
+	if (str[i] == '+');
+	else
+		flag = false;
+	i++;
+	for ( ;  i<len ;i ++)
+	{
+		sum += (str[i] - '0')*pow(10, len - 1-i);
+	}
+	if (flag==true)
+	{
+		if (sum >= j - 1)
+		{
+			for (int k = 0; k <j; k++)
+			{
+				printf("%c", temp[k]);
+			}
+			for (int m = 0; m < sum+1-j; m++)
+			{
+				printf("0");
+			}
+		}
+		else
+		{
+			int k;
+			for (k = 0; k < sum + 1; k++)
+				printf("%c", temp[k]);
+			printf(".");
+			for (; k < j; k++)
+				printf("%c", temp[k]);
+		}
+	}
+	else
+	{
+		printf("0.");
+		for (int k = 1; k < sum; k++)
+		{
+			printf("0");
+		}
+		for (int m = 0; m < j; m++)
+		{
+			printf("%c", temp[m]);
+		}
+	}
+	system("pause");
+	return 0;
+}
