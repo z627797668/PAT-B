@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 105;
+char A[maxn], B[maxn];
+void reverse(char C[],int lc)
+{
+	char temp;
+	for (int i = 0; i < lc/2; i++)
+	{
+		temp = C[i];
+		C[i]=C[lc - i - 1];
+		C[lc - i - 1]=temp;
+	}
+}
+int main()
+{
+	scanf("%s", A);
+	scanf("%s", B);
+	int la = strlen(A);
+	int lb = strlen(B);
+	reverse(A,la);
+	reverse(B,lb);
+	if (la > lb)
+	{
+		for (int k = lb; k < la; k++)
+		{
+			B[k] = '0';
+		}
+	}
+	else
+	{
+		for (int k = la; k < lb; k++)
+		{
+			A[k] = '0';
+		}
+		la = lb;
+	}
+	int flag = 0,ans;
+	for (int i = 0; i < la; i++)
+	{
+		if (flag == 0)
+		{
+			ans = (A[i] - '0' + B[i] - '0') % 13;
+			if (ans == 10)
+				A[i] = 'J';
+			else if (ans == 11)
+				A[i] = 'Q';
+			else if (ans == 12)
+				A[i] = 'K';
+			else
+				A[i] = ans + '0';
+			flag = 1;
+		}
+		else
+		{
+			ans = B[i] - A[i];
+			if (ans < 0)
+				ans += 10;
+			A[i] = ans + '0';
+			flag = 0;
+		}
+	}
+	for (int i = la-1; i >=0; i--)
+	{
+		printf("%c", A[i]);
+	}
+	system("pause");
+	return 0;
+}
