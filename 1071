@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int T, K;
+	scanf("%d %d", &T, &K);
+	int n1, b, t, n2;
+	for (int i = 0; i < K; i++)
+	{
+		scanf("%d %d %d %d", &n1, &b, &t, &n2);
+		if (t > T)
+		{
+			printf("Not enough tokens.  Total = %d.\n", T);
+		}
+		else if ((n1 > n2&&b == 0) || (n1 < n2&&b == 1))
+		{
+			T += t;
+			printf("Win %d!  Total = %d.\n", t, T);
+		}
+		else
+		{
+			T = T - t;
+			if (T == 0) {
+				printf("Lose %d.  Total = %d.\n", t, T);
+				printf("Game Over.");
+				break;
+			}
+			else
+			{
+				printf("Lose %d.  Total = %d.\n", t, T);
+			}
+		}
+	}
+	system("pause");
+	return 0;
+
+}
