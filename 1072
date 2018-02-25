@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int check[6];
+	int N, M;
+	scanf("%d %d", &N, &M);
+	for (int i = 0; i < M; i++)
+	{
+		scanf("%d", &check[i]);
+	}
+	int countstu = 0, countth = 0;
+	char temp[6];
+	int K = 0,th;
+	for (int i = 0; i < N; i++)
+	{
+		bool tt = false;
+		bool pr = false;
+		scanf("%s %d", temp, &K);
+		for (int j = 0; j <K ; j++)
+		{
+			scanf("%d", &th);
+			for (int m = 0; m < M; m++)
+			{
+				if (check[m] == th)
+				{
+					tt = true;
+					countth++;
+					if (pr == false)
+					{
+						pr = true;
+						printf("%s:", temp);
+					}
+					else;
+					printf(" %04d", th);
+				}
+			}
+		}
+		if (tt == true) {
+			printf("\n");
+			countstu++;
+		}
+	}
+	printf("%d %d", countstu, countth);
+	system("pause");
+	return 0;
+}
