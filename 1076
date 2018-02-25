@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<stdlib.h>
+const int maxn = 105;
+int main()
+{
+	int N;
+	char ans[maxn];
+	int num = 0;
+	char temp[20];
+	scanf("%d", &N);
+	getchar();
+	for (int i = 0; i <N; i++)
+	{
+		gets_s(temp);
+		int j = 0;
+		for ( ;  j<16;j+=4)
+		{
+			if (temp[j + 2] == 'T')
+			{
+				ans[num++] = temp[j]-'A'+'1';
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < num; i++)
+	{
+		printf("%c", ans[i]);
+	}
+	system("pause");
+	return 0;
+}
+
