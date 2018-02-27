@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int hashtable[128] = { 0 };
+const int maxn = 1005;
+int main()
+{
+	char pro[maxn];
+	char need[maxn];
+	int count;
+	gets_s(pro);
+	gets_s(need);
+	int prolen = strlen(pro);
+	int needlen = strlen(need);
+	count = needlen;
+	for (int i = 0; i < prolen; i++)
+	{
+		hashtable[pro[i]]++;
+	}
+	for (int i = 0; i < needlen; i++)
+	{
+		if (hashtable[need[i]] > 0)
+		{
+			count--;
+			hashtable[need[i]]--;
+		}
+	}
+	if (count == 0)
+		printf("Yes %d", prolen - needlen);
+	else
+	{
+		printf("No %d", count);
+	}
+	system("pause");
+	return 0;
+}
