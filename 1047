@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+const int maxn = 1005;
+int sum[maxn] = { 0 };
+int main()
+{
+	int N;
+	scanf_s("%d", &N);
+	char str[20];
+	getchar();
+	for (int i = 0; i < N; i++)
+	{
+		gets_s(str);
+		int len = strlen(str);
+		int du = 0;
+		int j = 0;
+		while (str[j]!='-')
+		{
+			du = du * 10 + str[j] - '0';
+			j++;
+		}
+		while (str[j]!=' ')
+		{
+			j++;
+		}
+		j++;
+		int score = 0;
+		while (j<len)
+		{
+			score += (str[j]-'0')*pow(10, len - 1 - j);
+			j++;
+		}
+		sum[du] += score;
+	}
+	int max = 0;
+	for (int i = 0; i < maxn; i++)
+	{
+		if (sum[max] < sum[i])
+		{
+			max = i;
+		}
+	}
+	printf("%d %d", max, sum[max]);
+	system("pause");
+	return 0;
+}
