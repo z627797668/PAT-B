@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 2000;
+char str[maxn];
+char revstr[maxn];
+void rev(char str[])
+{
+	int len = strlen(str);
+	for (int i = 0; i <len/2 ; i++)
+	{
+		char temp = str[i];
+		str[i] = str[len - 1 - i];
+		str[len - 1 - i] = temp;
+	}
+}
+bool ispal(char str[])
+{
+	int len = strlen(str) ;
+	int i;
+	for (i = 0; i < len/2; i++)
+	{
+		if (str[i] != str[len - 1 - i])
+			return false;
+	}
+	return true;
+}
+void add()
+{
+	int len = strlen(str);
+	int C = 0;
+	int a, b;
+	for (int i = 0; i < len; i++)
+	{
+		a = str[i] - '0';
+		b = revstr[i] - '0';
+		a =a+b+C;
+		if (a >= 10)
+		{
+			C = 1;
+		}
+		else
+		{
+			C = 0;
+		}
+		str[i] = (a % 10) + '0';
+	}
+	if (C == 1)
+	{
+		str[len] = '1';
+		str[len + 1] = '\0';
+	}
+}
+int main()
+{
+	int count = 0;
+	gets_s(str);
+	if(ispal(str))
+		printf("%s is a palindromic number.\n", str);
+	else {
+		while (count < 10)
+		{
+			strcpy(revstr, str);
+			rev(revstr);
+			printf("%s + %s = ", str, revstr);
+			add();
+			rev(str);
+			printf("%s\n", str);
+			if (ispal(str) == true)
+			{
+				printf("%s is a palindromic number.\n", str);
+				break;
+			}
+			count++;
+		}
+	}
+	if (count == 10)
+		printf("Not found in 10 iterations.");
+	system("pause");
+	return 0;
+}
