@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int hashtable[30] = { 0 };
+int hash(char c)
+{
+	if (c <= 'z'&&c >= 'a')
+	{
+		return c - 'a';
+	}
+	else if (c >= 'A'&&c <= 'Z')
+	{
+		return c - 'A';
+	}
+	else if (c == '-')
+		return 26;
+	else
+	{
+		return 27 + c - '0';
+	}
+}
+int main()
+{
+	char A[85],B[85];
+	scanf("%s", A);
+	scanf("%s", B);
+	int lena = strlen(A);
+	int lenb = strlen(B);
+	int i = 0,j=0;
+	while (i<lena&&j<lenb)
+	{
+		if (A[i] == B[j])
+		{
+			i++;
+			j++;
+		}
+		else
+		{
+			if (hashtable[hash(A[i])] == 0)
+			{
+				if (A[i] >= 'a'&&A[i] <= 'z')
+					printf("%c", A[i] - 'a' + 'A');
+				else
+					printf("%c", A[i]);
+				hashtable[hash(A[i])]++;
+			}
+			i++;
+		}
+	}
+	while (i<lena)
+	{
+		if (hashtable[hash(A[i])] == 0)
+		{
+			if (A[i] >= 'a'&&A[i] <= 'z')
+				printf("%c", A[i] - 'a' + 'A');
+			else
+				printf("%c", A[i]);
+			hashtable[hash(A[i])]++;
+		}
+		i++;
+	}
+	system("pause");
+	return 0;
+}
