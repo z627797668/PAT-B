@@ -1,0 +1,102 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 1005;
+int main()
+{
+	char ch, temp[maxn];
+	scanf("%c", &ch);
+	char ans[maxn];
+	getchar();
+	int num = 0;
+	int len;
+	if (ch == 'C')
+	{
+		gets_s(temp);
+		len = strlen(temp);
+		int count = 1;
+		for (int i = 0; i < len; i++)
+		{
+			if (i + 1 < len)
+			{
+				if (temp[i] == temp[i + 1])
+				{
+					count++;
+				}
+				else
+				{
+					int nn[105];
+					int nnum = 0;
+					if (count > 1) {
+						do
+						{
+							nn[nnum++] = count % 10;
+							count /= 10;
+						} while (count != 0);
+						count = 1;
+						for (int k = nnum - 1; k >= 0; k--)
+						{
+							ans[num++] = nn[k] + '0';
+						}
+					}
+					ans[num++] = temp[i];
+				}
+			}
+			else
+			{
+				if (temp[i] == temp[i-1])
+				{
+					int nn[105];
+					int nnum = 0;
+					do
+					{
+						nn[nnum++] = count % 10;
+						count /= 10;
+					} while (count != 0);
+					for (int k = nnum - 1; k >= 0; k--)
+					{
+						ans[num++] = nn[k] + '0';
+					}
+					ans[num++] = temp[i];
+				}
+				else
+				{
+					ans[num++] = temp[i];
+				}
+			}
+		}
+		for (int i = 0; i < num; i++)
+		{
+			printf("%c", ans[i]);
+		}
+	}
+	else
+	{
+		gets_s(temp);
+		len = strlen(temp);
+		int sum = 0;
+		for (int i = 0; i < len; i++)
+		{
+			if (temp[i] >= '0'&&temp[i] <= '9')
+			{
+				sum = sum * 10 + temp[i] - '0';
+			}
+			else
+			{
+				if (sum > 0)
+				{
+					for (int j = 0; j < sum; j++)
+					{
+						printf("%c", temp[i]);
+					}
+					sum = 0;
+				}
+				else
+				{
+					printf("%c", temp[i]);
+				}
+			}
+		}
+	}
+	system("pause");
+	return 0;
