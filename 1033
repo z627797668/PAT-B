@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 100005;
+bool hashtable[256] = { true };
+int main()
+{
+	memset(hashtable, true, sizeof(hashtable));
+	char broken[maxn];
+	char str[maxn];
+	gets_s(broken);
+	gets_s(str);
+	int lens = strlen(str);
+	int lenb = strlen(broken);
+	bool p = false;
+	for (int i = 0; i < lenb; i++)
+	{
+		hashtable[broken[i]] = false;
+	}
+	for (int i = 0; i < lens; i++)
+	{
+		if (str[i] >= 'a'&&str[i] <= 'z')
+		{
+			if (hashtable[str[i] - 'a' + 'A'] == false);
+			else
+			{
+				p = true;
+				printf("%c", str[i]);
+			}
+		}
+		else if (str[i] >= 'A'&&str[i] <= 'Z')
+		{
+			if (hashtable[str[i]] == false || hashtable['+']==false);
+			else {
+				printf("%c", str[i]);
+				p = true;
+			}
+		}
+		else
+		{
+			if (hashtable[str[i]] == true)
+			{
+				printf("%c", str[i]);
+				p = true;
+			}
+		}
+	}
+	if (p == false)printf("\n");
+	system("pause");
+	return 0;
+}
