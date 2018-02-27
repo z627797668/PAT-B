@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 1005;
+int hashtable[26] = { 0 };
+void hash(char c)
+{
+	if (c >= 'a'&&c <= 'z')
+		hashtable[c - 'a']++;
+	else if (c >= 'A'&&c <= 'Z')
+		hashtable[c - 'A']++;
+}
+int main()
+{
+	char str[maxn];
+	gets_s(str);
+	int len = strlen(str);
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] >= 'a'&&str[i] <= 'z')
+			hash(str[i]);
+		else if (str[i] >= 'A'&&str[i] <= 'Z')
+			hash(str[i]);
+		else;
+	}
+	int max = 0;
+	for (int i = 0; i < 26; i++)
+	{
+		if (hashtable[i] > hashtable[max])
+			max = i;
+	}
+	printf("%c %d", 'a' + max, hashtable[max]);
+	system("pause");
+	return 0;
+}
