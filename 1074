@@ -1,0 +1,109 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 25;
+char jin[maxn];
+char s1[maxn];
+char s2[maxn];
+void rev(char str[])
+{
+	int len = strlen(str);
+	for (int i = 0; i < len/2; i++)
+	{
+		char temp;
+		temp = str[i];
+		str[i] = str[len - i - 1];
+		str[len-i-1] = temp;
+	}
+}
+void add()
+{
+	int C = 0;
+	int nn;
+	int len1 = strlen(s1);
+	int len2 = strlen(s2);
+	int wh;
+	int len;
+	if (len2 > len1)
+	{
+		len = len2;
+		wh = 2;
+	}
+	else
+	{
+		len = len1;
+		wh = 1;
+	}
+	if (wh == 1)
+	{
+		for (int k = len2; k < len; k++)
+		{
+			s2[k] = '0';
+		}
+	}
+	else
+	{
+		for (int k = len1; k < len; k++)
+		{
+			s1[k] = '0';
+		}
+	}
+	for (int i = 0; i <len; i++)
+	{
+		nn = s1[i] - '0' + s2[i] - '0'+C;
+		if (nn >= jin[i] - '0')
+		{
+			if (jin[i] == '0')
+			{
+				if (nn >= 10)
+					C = 1;
+				else
+					C = 0;
+			}
+			else
+			{
+				C = 1;
+			}
+		}
+		else
+		{
+			C = 0;
+		}
+		if (jin[i] != '0')
+			s1[i] = nn % (jin[i] - '0') + '0';
+		else
+			s1[i] = nn % 10 + '0';
+	}
+	if (C == 1)
+	{
+		s1[len] = '1';
+		s1[len + 1] = '\0';
+	}
+}
+int main()
+{
+	int N;
+	scanf("%s", jin);
+	scanf("%s", s1);
+	scanf("%s", s2);
+	rev(jin);
+	rev(s1);
+	rev(s2);
+	add();
+	rev(s1);
+	int len = strlen(s1);
+	bool t = false;
+	for (int i = 0; i < len; i++)
+	{
+		if (s1[i] == '0'&&t == false);
+		else
+		{
+			printf("%c", s1[i]);
+			t = true;
+		}
+	}
+	if (t == false)
+		printf("0");
+	system("pause");
+	return 0;
+}
