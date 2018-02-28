@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<algorithm>
+using namespace std;
+const int maxn = 1005;
+struct pie
+{
+	double total;
+	double sum;
+	double single;
+}p[maxn];
+bool cmp(pie a, pie b)
+{
+	return a.single > b.single;
+}
+int main()
+{
+	int N, D;
+	scanf("%d %d", &N, &D);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%lf", &p[i].sum);
+	}
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%lf", &p[i].total);
+		p[i].single = p[i].total*1.0 / p[i].sum;
+	}
+	sort(p, p + N, cmp);
+	int count = 0;
+	double all = 0;
+	for (int i = 0; i < N; i++)
+	{
+		if (count + p[i].sum <= D)
+		{
+			count = p[i].sum + count;
+			all = all + p[i].total;
+		}
+		else
+		{
+			all = all + (p[i].single*(D - count));
+			break;
+		}
+	}
+	printf("%.2lf", all);
+	system("pause");
+	return 0;
+}
