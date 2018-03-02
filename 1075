@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<vector>
+using namespace std;
+const int maxn = 100005;
+struct Node
+{
+	int data;
+	int next;
+}node[maxn];
+vector<int>v1, v2, v3;
+int main()
+{
+	int start, K, N;
+	int tnow, tdata,tnext;
+	scanf("%d %d %d", &start, &N, &K);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%d %d %d", &tnow, &tdata, &tnext);
+		node[tnow].data = tdata;
+		node[tnow].next = tnext;
+	}
+	int count = 0;
+	tnow = start;
+	do
+	{
+		count++;
+		if (node[tnow].data < 0)
+			v1.push_back(tnow);
+		else if (node[tnow].data >= 0 && node[tnow].data <= K)
+			v2.push_back(tnow);
+		else v3.push_back(tnow);
+		tnow = node[tnow].next;
+	} while (tnow!=-1);
+	int next;
+	bool b = false;
+	while (1)
+	{
+		if (v1.size() > 0)
+		{
+			for (int j = 0; j < v1.size(); j++)
+			{
+				if (j + 1 < v1.size())
+					printf("%05d %d %05d\n", v1[j], node[v1[j]].data, v1[j + 1]);
+				else
+				{
+					if (v2.size() > 0)
+						printf("%05d %d %05d\n", v1[j], node[v1[j]].data, v2[0]);
+					else if (v3.size() > 0)
+						printf("%05d %d %05d\n", v1[j], node[v1[j]].data, v3[0]);
+					else {
+						printf("%05d %d -1\n", v1[j], node[v1[j]].data);
+						b = true;
+						break;
+					}
+				}
+			}
+		}
+		if (v2.size() > 0)
+		{
+			for (int j = 0; j < v2.size(); j++)
+			{
+				if (j + 1 < v2.size())
+					printf("%05d %d %05d\n", v2[j], node[v2[j]].data, v2[j + 1]);
+				else
+				{
+					if (v3.size() > 0)
+						printf("%05d %d %05d\n", v2[j], node[v2[j]].data, v3[0]);
+					else {
+						printf("%05d %d -1\n", v2[j], node[v2[j]].data);
+						b = true;
+						break;
+
+					}
+				}
+			}
+		}
+		if (v3.size() > 0)
+		{
+			for (int j = 0; j < v3.size(); j++)
+			{
+				if (j + 1 < v3.size())
+					printf("%05d %d %05d\n", v3[j], node[v3[j]].data, v3[j + 1]);
+				else
+				{
+						printf("%05d %d -1\n", v3[j], node[v3[j]].data);
+						b = true;
+						break;
+				}
+			}
+		}
+		if (b == true)
+			break;
+	}
+	system("pause");
+	return 0;
+}
