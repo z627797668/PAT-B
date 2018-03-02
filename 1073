@@ -1,0 +1,148 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<vector>
+using namespace std;
+struct wrong
+{
+	int ti;
+	int xuan;
+}node[600];
+int an = 0;
+int mmax = 0;
+const int maxc = 105;
+const int maxn = 1005;
+int fullscore[maxc];
+double score[maxn] = { 0 };
+int wrong[maxc][6] = { 0 };
+bool right[maxc][6] = { false };
+int ansch[maxc] = { 0 };
+int rightnum[maxc] = { 0 };
+int main()
+{
+	int N, M;
+	bool t = true;
+	scanf("%d %d\n", &N, &M);
+	char str[300];
+	for (int i = 1; i <= M; i++)
+	{
+		gets_s(str);
+		fullscore[i] = str[0] - '0';
+		int len = str[4] - '0';
+		rightnum[i] = len;
+		ansch[i] = str[2] - '0';
+		for (int j = 0; j <len;j++)
+		{
+			right[i][str[6 + j * 2] - 'a'] = true;
+		}
+	}
+	for (int i = 0; i < N; i++)
+	{
+		gets_s(str);
+		int len = strlen(str);
+		int k = 0;
+		for (int j = 1; j <= M; j++)
+		{
+			while (str[k]!='(')
+			{
+				k++;
+			}
+			k++;
+			int ansnum = str[k] - '0';
+			k += 2;
+				int m = 0;
+				int ansr = 0;
+				int answ = 0;
+				int nn[5] = { 0 };
+				for (int cc = 0; cc <ansch[j]; cc++)
+				{
+					if (right[j][cc] == true)
+						nn[cc] = 1;
+				}
+				for (m = 0; m < ansnum; m++)
+				{
+					if (right[j][str[k + m * 2] - 'a'] ==false )
+					{
+						wrong[j][str[k + m * 2] - 'a']++;
+						answ++;
+					}
+					else
+					{
+						nn[str[k + m * 2] - 'a']=0;
+						ansr++;
+					}
+				}
+				if (answ > 0)
+				{
+					for (int ccc = 0; ccc < 5; ccc++)
+					{
+						if (nn[ccc] == 1)
+						{
+							wrong[j][ccc]++;
+						}
+					}
+					t = false;
+				}
+				else
+				{
+					if (ansr == rightnum[j])
+					{
+						score[i] += fullscore[j];
+					}
+					else 
+					{
+						for (int ccc = 0; ccc < 5; ccc++)
+						{
+							if (nn[ccc] == 1)
+							{
+								wrong[j][ccc]++;
+							}
+						}
+						t = false;
+						score[i] = score[i] + fullscore[j]*1.0 / 2;
+					}
+				}
+			}
+	}
+	if (t == true)
+	{
+		for (int i = 0; i < N; i++)
+		{
+			printf("%.1lf\n", score[i]);
+		}
+		printf("Too simple");
+	}
+	else
+	{
+		for (int i = 0; i < N; i++)
+		{
+			printf("%.1lf\n", score[i]);
+		}
+		for (int i = 1; i <= M; i++)
+		{
+			for (int k = 0; k < ansch[i]; k++)
+			{
+				if (wrong[i][k] >mmax)
+				{
+					an = 0;
+					node[an].ti = i;
+					node[an].xuan = k;
+					an++;
+					mmax = wrong[i][k];
+				}
+				else if (wrong[i][k] == mmax)
+				{
+					node[an].ti = i;
+					node[an].xuan = k;
+					an++;
+				}
+			}
+		}
+		for (int i = 0; i < an; i++)
+		{
+			printf("%d %d-%c\n", mmax, node[i].ti, node[i].xuan + 'a');
+		}
+	}
+	system("pause");
+	return 0;
+}
