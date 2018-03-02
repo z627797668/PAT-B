@@ -1,0 +1,92 @@
+#include<string>
+#include<stdio.h>
+#include<stdlib.h>
+#include<map>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int maxn = 30005;
+struct Node
+{
+	int g;
+	string s;
+	int pin;
+	int gz = -1;
+	int gm = -1;
+	int flag = 0;
+}node[maxn];
+map<string, int>mp;
+bool cmp(Node a, Node b)
+{
+	if (a.flag != b.flag)return a.flag > b.flag;
+	else if (a.g != b.g)return a.g > b.g;
+	else return a.s < b.s;
+}
+int main()
+{
+	int anscount = 0;
+	int P, M, N;
+	int num = 0;
+	string str;
+	int temp;
+	scanf("%d %d %d", &P, &M, &N);
+	for (int i = 0; i < P; i++)
+	{
+		getchar();
+		cin >> str;
+		scanf("%d", &temp);
+		if (temp >= 200) {
+				mp[str] = num;
+				node[num].pin = temp;
+				node[num].s=str;
+				num++;
+		}
+	}
+	for (int i = 0; i < M; i++)
+	{
+		getchar();
+		cin >> str;
+		scanf("%d", &temp);
+		if (mp.find(str) != mp.end())
+		{
+			node[mp[str]].gz = temp;
+		}
+	}
+	for (int i = 0; i < N; i++)
+	{
+		getchar();
+		cin >> str;
+		scanf("%d", &temp);
+		if (mp.find(str) != mp.end())
+		{
+			int total;
+			int id = mp[str];
+			int qz = node[id].gz;
+			node[id].gm = temp;
+			if (qz > temp)
+			{
+				double t1 = 0.4*qz + 0.6*temp;
+				total = 0.4*qz + 0.6*temp;
+				if (t1 >= (total + 0.5))
+					total++;
+			}
+			else
+			{
+				total = temp;
+			}
+			node[id].g = total;
+			if (total >= 60) {
+				anscount++;
+				node[id].flag = 1;
+			}
+		}
+	}
+	sort(node, node + num, cmp);
+	for (int i = 0; i < anscount; i++)
+	{
+		cout << node[i].s;
+		printf(" %d %d %d %d\n", node[i].pin, node[i].gz, node[i].gm, node[i].g);
+	}
+	system("pause");
+	return 0;
+}
