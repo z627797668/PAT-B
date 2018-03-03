@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+const int maxn = 100005;
+struct Node
+{
+	int data;
+	int pre;
+	int next;
+}node[maxn];
+int main()
+{
+	int start, N, K, tnext, tpre, tnow, tdata;
+	scanf("%d %d %d", &start, &N, &K);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%d %d %d", &tnow, &tdata, &tnext);
+		node[tnow].data = tdata;
+		node[tnow].next = tnext;
+	}
+	int count = 0;
+	tnow = start;
+	tpre = -1;
+	while (tnow != -1)
+	{
+		count++;
+		node[tnow].pre = tpre;
+		tpre = tnow;
+		tnow = node[tnow].next;
+	}
+	tnow = start;
+	int i = 0;
+	while (i<count)
+	{
+		if (i + K > count)
+		{
+			if (node[tnow].next == -1)
+				printf("%05d %d %d\n", tnow, node[tnow].data, node[tnow].next);
+			else
+				printf("%05d %d %05d\n", tnow, node[tnow].data, node[tnow].next);
+			i++;
+			tnow = node[tnow].next;
+		}
+		else
+		{
+			for (int j = 0; j < K - 1; j++)
+			{
+				tnow = node[tnow].next;
+			}
+			tnext = node[tnow].next;
+			for (int k = 0; k <K; k++)
+			{
+				if (k != K - 1)
+					printf("%05d %d %05d\n", tnow, node[tnow].data, node[tnow].pre);
+				else {
+					if (tnext != -1) {
+						int temp;
+						if (i + 2*K > count) {
+							printf("%05d %d %05d\n", tnow, node[tnow].data, tnext);
+						}
+						else
+						{
+							int tt=tnext;
+							int kk = 1;
+							while (kk<K)
+							{
+								kk++;
+								tt = node[tt].next;
+							}
+							printf("%05d %d %05d\n", tnow, node[tnow].data, tt);
+						}
+					}
+					else
+					{
+						printf("%05d %d %d\n", tnow, node[tnow].data, tnext);
+					}
+				}
+				tnow = node[tnow].pre;
+			}
+			i = i + K;
+			tnow = tnext;
+		}
+	}
+	system("pause");
+	return 0;
+}
