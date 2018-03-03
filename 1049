@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int N;
+	double ans = 0;
+	double temp;
+	int count;
+	scanf("%d", &N);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%lf", &temp);
+		ans+=temp*(i + 1)*(N - i);
+	}
+	printf("%.2lf", ans);
+	system("pause");
+	return 0;
+}
