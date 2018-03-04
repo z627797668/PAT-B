@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+const int maxn = 100005;
+int prime[maxn], pNum = 0;
+int p[maxn] = { false };
+void Find_prime()
+{
+	for (int i = 2; i < maxn; i++)
+	{
+		if (p[i] == false)
+		{
+			prime[pNum++] = i;
+			for (int j = i+i; j < maxn; j+=i)
+			{
+				p[j] = true;
+			}
+		}
+	}
+}
+int main()
+{
+	Find_prime();
+	int N;
+	int count = 0;
+	scanf("%d", &N);
+	for (int i = 1; i < pNum; i++)
+	{
+		if (prime[i] > N)
+			break;
+		else
+		{
+			if (prime[i] - prime[i - 1] == 2)
+				count++;
+		}
+	}
+	printf("%d", count);
+	system("pause");
+	return 0;
+}
