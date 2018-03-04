@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+const int maxn = 105;
+int main()
+{
+	int N;
+	char s[maxn];
+	scanf("%d", &N);
+	getchar();
+	for (int i = 0; i < N; i++)
+	{
+		int tp = 0;
+		int tt = 0;
+		gets_s(s);
+		int prea = 0;
+		int mida = 0;
+		int taila = 0;
+		int len = strlen(s);
+		int j;
+		for (j = 0; j < len; j++)
+		{
+			if (s[j] == 'A'&&tp == 0)
+			{
+				prea++;
+			}
+			else if (s[j] == 'P')
+			{
+				tp++;
+			}
+			else if (s[j] == 'A'&&tp!=0&&tt==0)
+			{
+				mida++;
+			}
+			else if (s[j] == 'T'&&tp!=0)
+			{
+				tt++;
+			}
+			else if (s[j] == 'A'&&tt!=0)
+			{
+				taila++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		if (j == len)
+		{
+			if (mida != 0&&tp==1&&tt==1&&taila==(mida*prea))
+			{
+				printf("YES\n");
+			}
+			else
+			{
+				printf("NO\n");
+			}
+		}
+		else
+		{
+			printf("NO\n");
+		}
+	}
+	system("pause");
+	return 0;
+}
