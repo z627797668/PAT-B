@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	long long up;
+	long long down;
+};
+long long gcd(long long a, long long b)
+{
+	if (b == 0)return a;
+	else return gcd(b, a%b);
+}
+node chu(node a, node b)
+{
+	node ret;
+	ret.down = a.down*b.up;
+	ret.up = a.up*b.down;
+	return ret;
+}
+node add(node a, node b)
+{
+	node ret;
+	ret.down = a.down*b.down;
+	ret.up = a.down*b.up + a.up*b.down;
+	return ret;
+}
+node jian(node a, node b)
+{
+	node ret;
+	ret.down = a.down*b.down;
+	ret.up = a.up*b.down - a.down*b.up;
+	return ret;
+}
+node chen(node a, node b)
+{
+	node ret;
+	ret.down = a.down*b.down;
+	ret.up = a.up*b.up;
+	return ret;
+}
+node simple(node a)
+{
+	node ret;
+	if (a.down < 0)
+	{
+		a.down = -a.down;
+		a.up = -a.up;
+	}
+	if (a.up == 0)
+		a.down = 1;
+	else
+	{
+		bool t = false;
+		if (a.up < 0) {
+			a.up = -a.up;
+			t = true;
+		}
+		int d = gcd(a.up, a.down);
+		a.up /= d;
+		a.down /= d;
+		if (t == true)a.up = -a.up;
+	}
+	ret = a;
+	return ret;
+}
+void prin(node a)
+{
+	a = simple(a);
+	if (a.down == 1) {
+		if (a.up < 0)
+			printf("(%lld)", a.up);
+		else
+			printf("%lld", a.up);
+	}
+	else
+	{
+		if (a.up < 0) {
+			printf("(-");
+			a.up = -a.up;
+			if (a.up / a.down > 0)
+				printf("%lld %lld/%lld)", a.up / a.down, a.up%a.down, a.down);
+			else
+				printf("%lld/%lld)", a.up, a.down);
+		}
+		else {
+			if (a.up / a.down > 0)
+				printf("%lld %lld/%lld", a.up / a.down, a.up%a.down, a.down);
+			else
+				printf("%lld/%lld", a.up, a.down);
+
+		}
+	}
+}
+int main()
+{
+	node a, b;
+	scanf("%lld/%lld %lld/%lld", &a.up, &a.down, &b.up, &b.down);
+	node sum, sub, mul, div;
+	sum = add(a, b);
+	prin(a);
+	printf(" + ");
+	prin(b);
+	printf(" = ");
+	prin(sum);
+	printf("\n");
+	sub = jian(a, b);
+	prin(a);
+	printf(" - ");
+	prin(b);
+	printf(" = ");
+	prin(sub);
+	printf("\n");
+	mul = chen(a, b);
+	prin(a);
+	printf(" * ");
+	prin(b);
+	printf(" = ");
+	prin(mul);
+	printf("\n");
+	b = simple(b);
+	if (b.up == 0)
+	{
+		prin(a);
+		printf(" / ");
+		prin(b);
+		printf(" = Inf");
+	}
+	else
+	{
+		div = chu(a, b);
+		prin(a);
+		printf(" / ");
+		prin(b);
+		printf(" = ");
+		prin(div);
+		printf("\n");
+	}
+	system("pause");
+	return 0;
+}
