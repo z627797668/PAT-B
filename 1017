@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct bign
+{
+	int d[1005];
+	int len;
+	bign()
+	{
+		memset(d, 0, sizeof(d));
+		len = 0;
+	}
+};
+char A[1005];
+bign change(char str[])
+{
+	bign a;
+	a.len = strlen(str);
+	for (int i = 0; i < a.len; i++)
+	{
+		a.d[i] = str[a.len - 1 - i] - '0';
+	}
+	return a;
+}
+int B;
+bign div(bign a, int&r)
+{
+	bign d;
+	d.len = a.len;
+	for (int i = a.len-1; i >=0; i--)
+	{
+		r = r * 10 + a.d[i] ;
+		d.d[i] = r / B;
+		r = r % B;
+	}
+	while (d.len-1>=1&&d.d[d.len-1]==0)
+	{
+		d.len--;
+	}
+	return d;
+}
+int main()
+{
+	scanf("%s", A);
+	scanf("%d", &B);
+	bign a = change(A);
+	int r = 0;
+	a = div(a, r);
+	for (int i = a.len-1; i >=0; --i)
+	{
+		printf("%d", a.d[i]);
+	}
+	printf(" %d", r);
+	system("pause");
+	return 0;
+}
