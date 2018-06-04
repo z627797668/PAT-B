@@ -1,30 +1,35 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include<cstdio>
+#include<cstring>
 const int maxn = 105;
-char ans[10][5] = { "ling","yi","er","san","si","wu","liu","qi","ba","jiu" };
+char numstr[10][5] = { "ling","yi","er","san","si","wu","liu","qi","ba","jiu" };
 int main()
 {
-	char str[maxn];
-	scanf("%s", str);
+	char s[maxn];
+	gets(s);
+	int len = strlen(s);
 	int sum = 0;
-	int len = strlen(str);
+	int ans[maxn];
+	int anslen = 0;
 	for (int i = 0; i < len; i++)
 	{
-		sum += str[i] - '0';
+		sum += s[i] - '0';
 	}
-	int num = 0;
-	int an[maxn];
-	do {
-		an[num++] = sum % 10;
-		sum /= 10;
-	} while (sum != 0);
-	for (int i = num-1; i >=0; i--)
+	if (sum == 0)
 	{
-		printf("%s", ans[an[i]]);
-		if (i > 0)
+		printf("ling");
+	}
+	else {
+		while (sum != 0)
+		{
+			ans[anslen++] = sum % 10;
+			sum /= 10;
+		}
+	}
+	for (int i = anslen - 1; i >= 0; i--)
+	{
+		printf("%s", numstr[i]);
+		if (i != 0)
 			printf(" ");
 	}
-	system("pause");
 	return 0;
 }
