@@ -1,16 +1,17 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include<cstdio>
 int main()
 {
-	int step = 0, n;
-	scanf_s("%d", &n);
+	int n;
+	int ans = 0;
+	scanf("%d", &n);
 	while (n!=1)
 	{
-		if (n % 2 == 0)n /= 2;
-		else n = (3 * n + 1) / 2;
-		step++;
+		ans++;
+		if (n % 2 == 0)
+			n /= 2;
+		else
+			n = (3 * n + 1) / 2;
 	}
-	printf("%d", step);
-	system("pause");
+	printf("%d", ans);
 	return 0;
 }
