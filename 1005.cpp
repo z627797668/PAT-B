@@ -1,8 +1,7 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<algorithm>
 using namespace std;
-const int maxn = 5888;
+const int maxn = 8888;//3n+1会很大
 bool cmp(int a, int b)
 {
 	return a > b;
@@ -47,6 +46,5 @@ int main()
 				printf(" ");
 		}
 	}
-	system("pause");
 	return 0;
 }
