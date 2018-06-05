@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 const int maxn = 105;
 struct student
 {
@@ -22,6 +21,5 @@ int main()
 	}
 	printf("%s %s\n", stu[max].name, stu[max].id);
 	printf("%s %s", stu[min].name, stu[min].id);
-	system("pause");
 	return 0;
 }
