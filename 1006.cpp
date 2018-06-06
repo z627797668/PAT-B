@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 int main()
 {
 	int n;
@@ -20,6 +19,5 @@ int main()
 	{
 		printf("%d",i);
 	}
-	system("pause");
 	return 0;
 }
