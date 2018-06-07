@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
 const int maxn = 2005;
 int main()
@@ -28,6 +27,5 @@ int main()
 				printf(" ");
 		}
 	}
-	system("pause");
 	return 0;
 }
